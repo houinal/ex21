@@ -1,0 +1,28 @@
+# docker-composeのファイルフォーマットver 
+version: '3.2'
+
+services:
+
+  jupyter:
+
+    # イメージ名
+    image: t01/jupyterlab:1.0
+    # dockerfileのbuild
+    build: .
+
+    # コンテナ名
+    container_name: 'T01_jupyterlab'
+
+    # host8888, コンテナ8888
+    ports: 
+      - 8888:8888
+
+    # 作業ディレクトリ
+    working_dir: '/home/user/notebook'
+
+    # ローカルと作業ディレクトリをマウント
+    volumes: 
+      - ./notebook:/home/user/notebook
+      
+    # 実行コマンド
+    command: jupyter lab --port 8888 --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token=''
