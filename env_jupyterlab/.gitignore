@@ -1,2 +1,3 @@
 # Jupyter Notebookの管理ファイルをGit管理外に設定
+# ・自動作成される「.ipynb_checkpoint」は要らない
 .ipynb_checkpoints
