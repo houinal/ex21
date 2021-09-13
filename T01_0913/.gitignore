@@ -1,4 +1,4 @@
 # jupyterLabのチェックポイントは除外
-.ipynb_checkpoint
+.ipynb_checkpoints
 
 .Trash*/
