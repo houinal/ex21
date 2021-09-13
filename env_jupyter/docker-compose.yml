@@ -1,0 +1,40 @@
+# バージョン
+version: '3.2'
+
+# サービス
+services: 
+
+  # Jupyter
+  jupyter:
+
+    # イメージ名
+    # ※Dockerfileをbuildするので
+    image: jupyter/notebook:1.0
+    build: .
+
+    # コンテナ名
+    container_name: 'juyter_notebook'
+
+    # ポート
+    # ※host：コンテナ
+    ports: 
+      - 8888:8888
+
+    # 作業ディレクトリ
+    working_dir: '/home/user1/notebook'
+
+    # マウント
+    # host：作業ディレクトリ（working_dir）
+    volumes: 
+      - ./notebook:/home/user1/notebook
+
+    # command
+    # ・port：Jupyter Notebookのポート番号
+    # ・ip：ローカルホストで起動していることを示す。
+    # 　　：コンテナの外からアクセスするために必要な設定
+    # ・no-browser：起動時にブラウザを起動しない
+    # 　　：コンテナを立ち上げだ際のブラウザを起動できないという警告を抑制している
+    # ・NotebookApp.token：ノートブックの画面をブラウザで開いた際のトークンを固定の文字列で指定する
+    # 　　：「''」の場合はトークンを要求しません
+    # 　　：※半角は入れない
+    command: jupyter notebook --port 8888 --ip=0.0.0.0 --no-browser --NotebookApp.token=''

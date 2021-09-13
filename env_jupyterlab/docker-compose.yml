@@ -1,0 +1,29 @@
+# バージョン
+version: '3.2'
+
+# サービス
+services: 
+
+  # jupyter
+  jupyter:
+    # イメージ名
+    image: jupyterlab/notebook:1.0
+    # Dockerfile
+    build: .
+
+    # コンテナ名
+    container_name: 'juypterlab_notebook'
+
+    # ポート番号
+    ports: 
+      - 8888:8888
+
+    # 作業ディレクトリ
+    working_dir: '/home/user1/notebook'
+
+    # マウント
+    volumes: 
+      - ./notebook:/home/user1/notebook
+
+    # command
+    command: jupyter lab --port 8888 --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token=''
