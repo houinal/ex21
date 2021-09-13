@@ -1,0 +1,58 @@
+# docker-compose.ymlのファイルフォーマットのバージョン
+# ※3.2ではvolumesでtypeを指定できる（らしい）
+version: '3.2'
+
+services: 
+
+  # サービス名
+  # ・docker-composeコマンドで使用
+  # ・通常はコンテナ名と揃えると良い
+  db:
+
+    # DockerHubから取得するイメージ
+    image: postgres:13.2-alpine
+
+    # コンテナ名
+    container_name: 'ex11_db'
+    
+    # コンテナで公開するポート番号
+    # ※ほかのサービスからアクセスできる
+    # ※ホストからはアクセスできない
+    expose: 
+      - "5432"
+
+    # 環境変数
+    # ・Dockerfileの「ENV」と同様
+    environment: 
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  python:
+    
+    # buildが指定されている場合は、イメージ名
+    image: ex11/python:1.0
+
+    # Dockerfileが格納されたフォルダ名
+    build: ./python
+
+    container_name: 'ex11_python'
+
+    # コンテナ起動時のコマンドを実行するディレクトリ
+    working_dir: '/tmp/work'
+
+    # ボリュームのマウントを指定
+    # ・ホスト側：docker-compose.ymlからの相対参照
+    volumes: 
+      - ./python/src:/tmp/work
+
+    # サービスの依存関係
+    depends_on: 
+      - db
+
+    # docker runの「-it」
+    stdin_open: true
+    tty: true
+
+    # デフォルトのコマンドを上書き
+    command: /bin/bash

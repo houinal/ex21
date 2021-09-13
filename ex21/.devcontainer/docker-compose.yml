@@ -1,0 +1,24 @@
+# バージョン
+version: '3.2'
+
+# サービス
+services: 
+
+  # サービス名
+  python:
+    # イメージ名
+    # ※buildの指定があるため
+    image: ex21/python:1.0
+    # Dockerfile
+    build: ./python
+    # コンテナ名
+    container_name: 'ex21_python'
+    # -it設定
+    stdin_open: true
+    tty: true
+    # 作業ディレクトリ（コンテナ内）
+    working_dir: '/tmp/work'
+    # ボリューム
+    # ホスト:コンテナ作業ディレクトリ
+    volumes:
+      - ../python:/tmp/work

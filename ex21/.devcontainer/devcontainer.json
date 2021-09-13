@@ -1,0 +1,27 @@
+{
+    /* VSCodeがコンテナに接続された際のタイトル */
+    "name": "Python Basic Project",
+
+    /* 起動するDocker Composeファイル */
+    "dockerComposeFile": "docker-compose.yml",
+
+    /* VSCodeで接続するサービス名 */
+    /* ※docker-compose.ymlで記載する必要あり */
+    "service": "python",
+
+    /* VsCodeを接続した際の作業ディレクトリ */
+    "workspaceFolder": "/tmp/work",
+
+    /* Python拡張機能をインストール */
+    "extensions": [
+        "ms-python.python"
+    ],
+
+    /* 
+    ** リモート開発のワークスペースに適用する
+    ** VSCodeエディタの設定を記述
+    */
+    "settings": {
+        "editor.tabSize": 2,
+    },
+}
